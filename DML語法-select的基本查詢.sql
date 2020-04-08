@@ -420,7 +420,8 @@ E2.員工編號[主管編號],
 E1.姓名[主管姓名]
 from dbo.員工 E1 left join dbo.員工 E2
 on E1.主管=E2.員工編號
---union聯集查詢
+--union聯集查詢(重複濾除+all避免)
+
 use Norwindc
 select 城市,行政區
 from  dbo.員工
@@ -428,22 +429,26 @@ union
 select 城市,行政區
 from  dbo.客戶
  
- use Norwindc
+use Norwindc
 select 城市,行政區,區域號碼
 from  dbo.員工
 union
 select 城市,行政區,郵遞區號
 from  dbo.客戶
-union
+union 
 select'台灣','台北','882'
+
 --intersect
- use Norwindc
+
+use Norwindc
 select 城市,行政區+'區'行政區
 from  dbo.員工
 intersect
 select 城市,行政區
 from  dbo.客戶
+
 --except
+
  use Norwindc
 select 城市,行政區+'區'行政區
 from  dbo.員工
